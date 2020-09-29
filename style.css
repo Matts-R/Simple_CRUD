@@ -1,0 +1,27 @@
+#paragraph {
+  margin-top: 30px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+li {
+  margin-bottom: 8px;
+}
+
+span {
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.remove-buttons {
+  color: white;
+  background-image: url("invalid.png");
+  background-size: cover;
+  width: 23px;
+  cursor: pointer;
+  height: 20px;
+  border: 1px solid black;
+  border-radius: 50%;
+}
