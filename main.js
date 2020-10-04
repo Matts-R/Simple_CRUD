@@ -20,7 +20,7 @@ function preventFormSubmit() {
     //The function preventDefault() will prevent the form from submitting
   }
 
-  var form = document.querySelector('form')
+  const form = document.querySelector('form')
   form.addEventListener('submit', handleFormSubmit)
   // When the form is submitted, the handleFormSubmit function will prevent it from going to the server
 }
