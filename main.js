@@ -1,18 +1,18 @@
-window.addEventListener('load', start)
-// Adding the function start when the window is loaded will prevent the page from "refresh"
+let namesRegistered = []
+let inputName = null
+let currentIndex = null
+let isEditing = false
 
-var namesRegistered = []
-var inputName = null
-var isEditing = false
-var currentIndex = null
-
-function start() {
+window.addEventListener('load', () => {
   inputName = document.querySelector('#inputName')
 
   preventFormSubmit()
+  // Adding this when the window is loaded will prevent the page from "refresh"
   activeInput()
   // This will ensure that, once loaded loaded, the input element will gain focus
-}
+  renderNames()
+})
+
 
 function preventFormSubmit() {
   function handleFormSubmit(event) {
@@ -27,7 +27,7 @@ function preventFormSubmit() {
 
 function activeInput() {
   function insertName(newName) {
-    namesRegistered.push(newName)
+    namesRegistered = [...namesRegistered, newName]
   }
 
   function updateName(newName) {
@@ -38,16 +38,17 @@ function activeInput() {
     let hasText = !!event.target.value && event.target.value.trim()
 
     if (!hasText) {
-      event.target.value = ''
+      clearInput()
       return;
     }
 
     if (event.key === 'Enter') {
       if (isEditing) {
         updateName(event.target.value)
+        clearInput()
       } else {
         insertName(event.target.value)
-        event.target.value = ''
+        clearInput()
       }
 
       isEditing = false
@@ -62,8 +63,8 @@ function activeInput() {
 function renderNames() {
   function createRemoveButton(index) {
     function deleteItem() {
-      // console.log("some bullshit it's happening here")
-      namesRegistered.splice(index, 1)
+      namesRegistered = namesRegistered.filter((_, i) => i !== index)
+
       renderNames()
     }
 
@@ -109,4 +110,9 @@ function renderNames() {
   }
 
   divNames.appendChild(ul)
+}
+
+const clearInput = () => {
+  inputName.value = ''
+  inputName.focus()
 }
